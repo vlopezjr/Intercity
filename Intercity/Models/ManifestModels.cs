@@ -44,8 +44,8 @@
         public DateTime Created { get; set; }
         public String Attention { get; set; }
         public String Comments { get; set; }
-        public int ClientId { get; set; }
-        public Client Client { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
         public int? PickupId { get; set; }
         public Pickup Pickup { get; set; }
         public int ReceiverId { get; set; }
@@ -76,7 +76,7 @@
         public DateTime Created { get; set; }
     }
 
-    public class Client
+    public class Customer
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -96,8 +96,8 @@
     public class Pickup
     {
         public int Id { get; set; }
-        public int ClientId { get; set; }
-        public Client Client { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
         public string Name { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }
@@ -113,8 +113,8 @@
     public class Receiver
     {
         public int Id { get; set; }
-        public int? ClientId { get; set; }
-        public Client Client { get; set; }
+        public int? CustomerId { get; set; }
+        public Customer Customer { get; set; }
         public string Name { get; set; }
         public string Address1 { get; set; }
         public string Address2 { get; set; }

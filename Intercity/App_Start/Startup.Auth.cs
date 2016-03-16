@@ -47,8 +47,8 @@ namespace Intercity
 
             // Uncomment the following lines to enable logging in with third party login providers
             //app.UseMicrosoftAccountAuthentication(
-            //    clientId: "",
-            //    clientSecret: "");
+            //    CustomerId: "",
+            //    CustomerSecret: "");
 
             //app.UseTwitterAuthentication(
             //   consumerKey: "",
@@ -60,8 +60,8 @@ namespace Intercity
 
             //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             //{
-            //    ClientId = "",
-            //    ClientSecret = ""
+            //    CustomerId = "",
+            //    CustomerSecret = ""
             //});
         }
     }

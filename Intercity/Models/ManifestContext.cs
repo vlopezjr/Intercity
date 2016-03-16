@@ -11,7 +11,7 @@ namespace Intercity.Models
         public ManifestContext() : base("name = DefaultConnection") { }
         public DbSet<Delivery> Deliveries { get; set; }
 
-        public DbSet<Client> Clients { get; set; }
+        public DbSet<Customer> Customers { get; set; }
 
         public DbSet<Receiver> Receivers { get; set; }
 

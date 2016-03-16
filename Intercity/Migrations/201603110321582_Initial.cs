@@ -8,7 +8,7 @@ namespace Intercity.Migrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Clients",
+                "dbo.Customers",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -50,17 +50,17 @@ namespace Intercity.Migrations
                         Created = c.DateTime(nullable: false),
                         Attention = c.String(),
                         Comments = c.String(),
-                        ClientId = c.Int(nullable: false),
+                        CustomerId = c.Int(nullable: false),
                         PickupId = c.Int(),
                         ReceiverId = c.Int(nullable: false),
                         DriverId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Clients", t => t.ClientId, cascadeDelete: true)
+                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
                 .ForeignKey("dbo.Drivers", t => t.DriverId, cascadeDelete: true)
                 .ForeignKey("dbo.Pickups", t => t.PickupId)
                 .ForeignKey("dbo.Receivers", t => t.ReceiverId, cascadeDelete: true)
-                .Index(t => t.ClientId)
+                .Index(t => t.CustomerId)
                 .Index(t => t.PickupId)
                 .Index(t => t.ReceiverId)
                 .Index(t => t.DriverId);
@@ -109,7 +109,7 @@ namespace Intercity.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        ClientId = c.Int(nullable: false),
+                        CustomerId = c.Int(nullable: false),
                         Name = c.String(),
                         Address1 = c.String(),
                         Address2 = c.String(),
@@ -122,15 +122,15 @@ namespace Intercity.Migrations
                         Created = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Clients", t => t.ClientId, cascadeDelete: true)
-                .Index(t => t.ClientId);
+                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
+                .Index(t => t.CustomerId);
             
             CreateTable(
                 "dbo.Receivers",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        ClientId = c.Int(),
+                        CustomerId = c.Int(),
                         Name = c.String(),
                         Address1 = c.String(),
                         Address2 = c.String(),
@@ -143,33 +143,33 @@ namespace Intercity.Migrations
                         Created = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Clients", t => t.ClientId)
-                .Index(t => t.ClientId);
+                .ForeignKey("dbo.Customers", t => t.CustomerId)
+                .Index(t => t.CustomerId);
             
         }
         
         public override void Down()
         {
             DropForeignKey("dbo.Deliveries", "ReceiverId", "dbo.Receivers");
-            DropForeignKey("dbo.Receivers", "ClientId", "dbo.Clients");
+            DropForeignKey("dbo.Receivers", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.Deliveries", "PickupId", "dbo.Pickups");
-            DropForeignKey("dbo.Pickups", "ClientId", "dbo.Clients");
+            DropForeignKey("dbo.Pickups", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.Freights", "Delivery_Id", "dbo.Deliveries");
             DropForeignKey("dbo.Deliveries", "DriverId", "dbo.Drivers");
-            DropForeignKey("dbo.Deliveries", "ClientId", "dbo.Clients");
-            DropIndex("dbo.Receivers", new[] { "ClientId" });
-            DropIndex("dbo.Pickups", new[] { "ClientId" });
+            DropForeignKey("dbo.Deliveries", "CustomerId", "dbo.Customers");
+            DropIndex("dbo.Receivers", new[] { "CustomerId" });
+            DropIndex("dbo.Pickups", new[] { "CustomerId" });
             DropIndex("dbo.Freights", new[] { "Delivery_Id" });
             DropIndex("dbo.Deliveries", new[] { "DriverId" });
             DropIndex("dbo.Deliveries", new[] { "ReceiverId" });
             DropIndex("dbo.Deliveries", new[] { "PickupId" });
-            DropIndex("dbo.Deliveries", new[] { "ClientId" });
+            DropIndex("dbo.Deliveries", new[] { "CustomerId" });
             DropTable("dbo.Receivers");
             DropTable("dbo.Pickups");
             DropTable("dbo.Freights");
             DropTable("dbo.Drivers");
             DropTable("dbo.Deliveries");
-            DropTable("dbo.Clients");
+            DropTable("dbo.Customers");
         }
     }
 }

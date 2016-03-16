@@ -4,5 +4,11 @@
 
 function ManifestController() {
     var vm = this;
-    vm.name = "manifest";
+    //vm.data = {
+    //    "deliveries": [
+    //        {manifestNo:"1", customerRefNo="1", isCOD="false", },
+    //        {}
+
+    //    ]
+    //}
 }

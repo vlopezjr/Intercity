@@ -470,8 +470,8 @@ interface JQueryInputEventObject extends BaseJQueryEventObject {
 
 interface JQueryMouseEventObject extends JQueryInputEventObject {
     button: number;
-    clientX: number;
-    clientY: number;
+    CustomerX: number;
+    CustomerY: number;
     offsetX: number;
     offsetY: number;
     pageX: number;

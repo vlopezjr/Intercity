@@ -14,20 +14,20 @@ namespace Intercity.Models
             _context = context;
         }
 
-        public List<Client> GetAllClients()
+        public List<Customer> GetAllCustomers()
         {
-            return _context.Clients.ToList();
+            return _context.Customers.ToList();
         }
 
-        public void AddClient(Client client)
+        public void AddCustomer(Customer Customer)
         {
-            _context.Clients.Add(client);
+            _context.Customers.Add(Customer);
             _context.SaveChanges();
         }
 
-        public List<Pickup> GetAllPickupsForClient(int clientId)
+        public List<Pickup> GetAllPickupsForCustomer(int CustomerId)
         {
-            return _context.Pickups.Where(p=>p.ClientId==clientId).ToList();
+            return _context.Pickups.Where(p=>p.CustomerId==CustomerId).ToList();
         }
 
         public Pickup GetPickupById(int id)
@@ -47,9 +47,9 @@ namespace Intercity.Models
             _context.SaveChanges();
         }
         
-        public List<Receiver> GetAllReceiversForClient(int clientId)
+        public List<Receiver> GetAllReceiversForCustomer(int CustomerId)
         {
-            return _context.Receivers.Where(p => p.ClientId == clientId).ToList();
+            return _context.Receivers.Where(p => p.CustomerId == CustomerId).ToList();
         }
 
         public Receiver GetReceiverById(int id)
