@@ -5,14 +5,16 @@
     using System.Linq;
     using System.Web;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class Delivery
     {
+        [Key]
         public int Id { get; set; }
         [Display(Name = "Cust#")]
         public string CustomerRefNo { get; set; }
         [Display(Name = "Ref.No.")]
-        public int RefNo { get; set; }
+        public string ManifestNo { get; set; }
         [Display(Name = "Delivery Charges")]
         public decimal DeliveryCharge { get; set; }
         [Display(Name = "Weight Charge")]
@@ -45,18 +47,20 @@
         public String Attention { get; set; }
         public String Comments { get; set; }
         public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
-        public int? PickupId { get; set; }
-        public Pickup Pickup { get; set; }
-        public int ReceiverId { get; set; }
-        public Receiver Receiver { get; set; }
+        public virtual Customer Customer { get; set; }
+        public int? PickupAddressId { get; set; }
+        [ForeignKey("PickupAddressId")]
+        public virtual Address PickupAddress { get; set; }
+        public int DeliverToAddressId { get; set; }
+        [ForeignKey("DeliverToAddressId")]
+        public virtual Address DeliverToAddress { get; set; }
         public int DriverId { get; set; }
         public Driver Driver { get; set; }
-        public ICollection<Freight> Freights { get; set; }
+        public ICollection<Parcel> Parcels { get; set; }
     }
-
     public class Driver
     {
+        [Key]
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -75,9 +79,9 @@
         public decimal HourlyRate { get; set; }
         public DateTime Created { get; set; }
     }
-
-    public class Customer
+    public class Customer 
     {
+        [Key]
         public int Id { get; set; }
         public string Name { get; set; }
         public string Address1 { get; set; }
@@ -90,11 +94,11 @@
         public string SecondaryPhone { get; set; }
         public string EmailAddress { get; set; }
         public DateTime Created { get; set; }
-        public ICollection<Delivery> Deliveries { get; set; }
+        public virtual ICollection<Delivery> Deliveries { get; set; }
     }
-
-    public class Pickup
+    public class Address
     {
+        [Key]
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
@@ -108,28 +112,10 @@
         public string PrimaryPhone { get; set; }
         public string EmailAddress { get; set; }
         public DateTime Created { get; set; }
-    }
-
-    public class Receiver
+    } 
+    public class Parcel
     {
-        public int Id { get; set; }
-        public int? CustomerId { get; set; }
-        public Customer Customer { get; set; }
-        public string Name { get; set; }
-        public string Address1 { get; set; }
-        public string Address2 { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Zip { get; set; }
-        public string PointOfContact { get; set; }
-        public string PrimaryPhone { get; set; }
-        public string EmailAddress { get; set; }
-        public DateTime Created { get; set; }
-
-    }
-
-    public class Freight
-    {
+        [Key]
         public int Id { get; set; }
         public int Quantity { get; set; }
         public string Type { get; set; }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.Entity;
 
 namespace Intercity.Models
 {
@@ -9,11 +10,22 @@ namespace Intercity.Models
     {
         private ManifestContext _context;
 
-        public ManifestRepository(ManifestContext context)
+        public ManifestRepository()     
+            : this (new ManifestContext()) {}
+       
+        public ManifestRepository(ManifestContext context) 
         {
             _context = context;
         }
 
+        public List<Delivery> GetAllDeliveries()
+        {
+            return _context.Deliveries
+                .Include(p => p.Customer)
+                .Include(p => p.Driver)
+                .Include(p => p.Parcels)
+                .ToList();
+        }
         public List<Customer> GetAllCustomers()
         {
             return _context.Customers.ToList();
@@ -25,19 +37,19 @@ namespace Intercity.Models
             _context.SaveChanges();
         }
 
-        public List<Pickup> GetAllPickupsForCustomer(int CustomerId)
+        public List<Address> GetAllAddressesForCustomer(int CustomerId)
         {
-            return _context.Pickups.Where(p=>p.CustomerId==CustomerId).ToList();
+            return _context.Addresses.Where(p=>p.CustomerId==CustomerId).ToList();
         }
 
-        public Pickup GetPickupById(int id)
+        public Address GetPickupById(int id)
         {
-            return _context.Pickups.Find(id);
+            return _context.Addresses.Find(id);
         }
 
-        public void AddPickup(Pickup pickup)
+        public void AddPickup(Address pickup)
         {
-            _context.Pickups.Add(pickup);
+            _context.Addresses.Add(pickup);
             _context.SaveChanges();
         }      
 
@@ -47,21 +59,7 @@ namespace Intercity.Models
             _context.SaveChanges();
         }
         
-        public List<Receiver> GetAllReceiversForCustomer(int CustomerId)
-        {
-            return _context.Receivers.Where(p => p.CustomerId == CustomerId).ToList();
-        }
-
-        public Receiver GetReceiverById(int id)
-        {
-            return _context.Receivers.Find(id);
-        }
-
-        public void AddReceiver(Receiver receiver)
-        {
-            _context.Receivers.Add(receiver);
-            _context.SaveChanges();
-        }
+      
 
         private bool disposed = false;
         protected virtual void Dispose(bool disposing)

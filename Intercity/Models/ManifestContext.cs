@@ -13,10 +13,9 @@ namespace Intercity.Models
 
         public DbSet<Customer> Customers { get; set; }
 
-        public DbSet<Receiver> Receivers { get; set; }
+        public DbSet<Address> Addresses { get; set; }
 
         public DbSet<Driver> Drivers { get; set; }
-
-        public DbSet<Pickup> Pickups { get; set; }
+        
     }
 }
